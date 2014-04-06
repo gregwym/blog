@@ -1,0 +1,9 @@
+{
+  "name": "blog",
+  "dependencies": {
+    "requirejs": "~2.1.11",
+    "angular": "~1.2.16",
+    "angular-bootstrap": "~0.10.0",
+    "bootstrap": "~3.1.1"
+  }
+}
