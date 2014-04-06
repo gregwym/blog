@@ -5,9 +5,18 @@ define(['angular'], function(angular) {
       restrict: 'E',
       templateUrl: '/templates/container',
       controller: function($scope, $log) {
-        $scope.posts = ['abc', 'def'];
+
       },
       link: function($scope, iElm, iAttrs, controller) {
+
+      }
+    };
+  })
+  .directive('list', function() {
+    return {
+      restrict: 'E',
+      templateUrl: '/templates/list',
+      controller: function($scope, $log) {
 
       }
     };

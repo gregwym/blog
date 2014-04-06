@@ -1,0 +1,6 @@
+h2.title Posts
+  small.subtitle  everything
+
+.post-row(ng-repeat="post in posts", ng-click="show(post)")
+  h3.title {{ post.title }}
+    small.date  on {{ post.date }}
