@@ -1,8 +1,3 @@
-define(['angular', './controllers'], function(angular, controllers) {
-  /**
-  * app Module
-  *
-  * Main app
-  */
-  return angular.module('app', ['app.controllers']);
+define(['angular', './states'], function(angular) {
+  return angular.module('app', ['app.states']);
 });

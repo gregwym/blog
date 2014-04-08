@@ -1,24 +1,18 @@
-define(['angular'], function(angular) {
-  return angular.module('app.directives', [])
-  .directive('container', function(){
-    return {
-      restrict: 'E',
-      templateUrl: '/templates/container',
-      controller: function($scope, $log) {
-
-      },
-      link: function($scope, iElm, iAttrs, controller) {
-
-      }
-    };
-  })
+define(['angular', 'marked', 'angular.marked'], function(angular, marked) {
+  return angular.module('app.directives', ['hc.marked'])
   .directive('list', function() {
     return {
       restrict: 'E',
-      templateUrl: '/templates/list',
-      controller: function($scope, $log) {
-
-      }
+      templateUrl: '/templates/list'
+    };
+  })
+  .directive('post', function(){
+    return {
+      restrict: 'E',
+      scope: {
+        content: '='
+      },
+      templateUrl: '/templates/post'
     };
   });
 });

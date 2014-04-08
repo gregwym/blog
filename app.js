@@ -1,5 +1,23 @@
 var express = require('express');
 var app = express();
+var fs = require('fs');
+
+var getPosts = function() {
+  var postFileNameRegex = /^([^\.]+)\.(\d+).([\w\d]+)$/;
+  return fs.readdirSync(__dirname + '/usr/posts').map(function(filename) {
+    var match = postFileNameRegex.exec(filename);
+    if (!match) { return null; }
+    return {
+      'url': '/usr/posts/' + filename,
+      'slug': match[1],
+      'title': match[1].replace(/[_-]/g, ' ').toLowerCase(),
+      'date': match[2],
+      'format': match[3]
+    };
+  }).filter(function(entry) {
+    return entry !== null;
+  });
+};
 
 app.configure(function() {
   app.set('views', __dirname + '/src/templates');
@@ -21,21 +39,22 @@ app.get('/templates/:name', function(req, res) {
 });
 
 app.get('/posts', function(req, res) {
-  var postFileNameRegex = /^([^\.]+)\.(\d+).([\w\d]+)$/;
-  var posts = require('fs').readdirSync(__dirname + '/usr/posts').map(function(filename) {
-    var match = postFileNameRegex.exec(filename);
-    if (!match) { return null; }
-    return {
-      'url': '/usr/posts/' + filename,
-      'title': match[1].replace(/[_-]/g, ' ').toLowerCase(),
-      'date': match[2],
-      'format': match[3]
-    };
-  }).filter(function(entry) {
-    return entry !== null;
-  });
+  var posts = getPosts();
 
   return res.json(posts);
+});
+
+app.get('/posts/:slug', function(req, res) {
+  var posts = getPosts();
+  var post = posts.filter(function(post) {
+    return post.slug == req.params.slug;
+  });
+
+  if (post.length === 0) {
+    return res.status(404).send();
+  }
+
+  return res.json(post[0]);
 });
 
 app.listen(3000, function() {

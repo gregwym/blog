@@ -1,29 +1,31 @@
 require.config({
   baseUrl: '/src',
   paths: {
+    'marked': '../lib/marked/lib/marked',
     'angular': '../lib/angular/angular',
-    'jquery': '../lib/jquery/jquery',
-    'bootstrap': '../lib/bootstrap/dist/js/bootstrap',
-    'angular-bootstrap': '../lib/angular-bootstrap/ui-bootstrap-tpls'
+    'angular.marked': '../lib/angular-marked/angular-marked',
+    'angular.ui.router': '../lib/angular-ui-router/release/angular-ui-router',
+    'angular.ui.bootstrap': '../lib/angular-bootstrap/ui-bootstrap-tpls'
   },
   shim: {
     'angular': {
       exports: 'angular'
     },
-    'jquery': {
-      exports: '$'
+    'angular.marked': {
+      deps: ['angular', 'marked']
     },
-    'bootstrap': {
-      deps: ['jquery'],
-      exports: '$.fn.popover'
-    },
-    'angular-bootstrap': {
-      deps: ['bootstrap']
-    }
+    'angular.ui.router': ['angular'],
+    'angular.ui.bootstrap': ['angular']
   }
 });
 
-define(['app/index'], function(index) {
+require(['marked'], function(marked) {
+  this.marked = marked;
+  this.name = 'NG_DEFER_BOOTSTRAP!';
+});
+
+require(['angular', 'app/index'], function (angular, app) {
   console.log('App loaded');
-  return index;
+  angular.resumeBootstrap();
+  return app;
 });
