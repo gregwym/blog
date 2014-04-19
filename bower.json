@@ -7,7 +7,7 @@
     "angular-bootstrap": "~0.10.0",
     "angular-route": "~1.2.16",
     "angular-ui-router": "~0.2.10",
-    "angular-marked": "Hypercubed/angular-marked#~0.0.5",
-    "angular-octokit-adapter": "git@github.com:gregwym/angular-octokit-adapter.git"
+    "angular-marked": "Hypercubed/angular-marked#master",
+    "angular-octokit-adapter": "gregwym/angular-octokit-adapter#master"
   }
 }
