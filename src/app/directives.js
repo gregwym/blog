@@ -1,18 +1,15 @@
-define(['angular', 'marked', 'angular.marked'], function(angular, marked) {
+define(['angular', 'angular.marked'], function(angular, marked) {
   return angular.module('app.directives', ['hc.marked'])
   .directive('list', function() {
     return {
       restrict: 'E',
-      templateUrl: '/templates/list'
+      templateUrl: '/src/templates/list.html'
     };
   })
   .directive('post', function(){
     return {
       restrict: 'E',
-      scope: {
-        content: '='
-      },
-      templateUrl: '/templates/post'
+      templateUrl: '/src/templates/post.html'
     };
   });
 });

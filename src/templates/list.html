@@ -1,0 +1,6 @@
+<div ng-repeat="post in posts" ng-click="whatever()" class="post-row">
+  <h3 class="title">
+    <a ui-sref="show({ name: post.name })">{{ post.name }}</a>
+    <small class="date"> on {{ post.date }}</small>
+  </h3>
+</div>
